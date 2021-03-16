@@ -103,6 +103,6 @@ Logger.logfile = (path) ->
 	(level, tag, ...) -> -- TODO: new thread?
 		args = {...}
 		formatted = [stringify args[i] for i = 1, table.maxn args]
-		writeline "%s\t%s [%s] %s"\format os.date!, level, tag, table.concat formatted, ' '
+		writeline "%s  %s\t[%s] %s"\format os.date!, level, tag, table.concat formatted, ' '
 
 Logger

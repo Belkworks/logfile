@@ -176,7 +176,7 @@ Logger.logfile = function(path)
       end
       formatted = _accum_0
     end
-    return writeline(("%s\t%s [%s] %s"):format(os.date(), level, tag, table.concat(formatted, ' ')))
+    return writeline(("%s  %s\t[%s] %s"):format(os.date(), level, tag, table.concat(formatted, ' ')))
   end
 end
 return Logger
