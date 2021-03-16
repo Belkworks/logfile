@@ -37,4 +37,13 @@ log.info('other','hello','world')
 
 -- won't log, its level is OFF
 log.error('hush','oh no!')
+
+-- you can change log levels on the fly
+log.init({hush="INFO"})
+
+-- logs an error now because we changed it
+log.error('hush','this one logs!')
+
+-- pass nothing to clear the callback (stop logging)
+log.init()
 ```
