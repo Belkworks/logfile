@@ -155,6 +155,7 @@ end
 Logger.logfile = function(path)
   local writeline
   writeline = function(text)
+    text = text .. '\n'
     if isfile(path) then
       return appendfile(path, text)
     else

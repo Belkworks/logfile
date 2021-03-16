@@ -76,17 +76,18 @@ stringify = (V, wrap) ->
 			if wrap
 				'%q'\format V
 			else V
-		when 'table' -- assume it is an array
+		when 'table'
 			return '[]' if #keys(V) == 0
 			if isArray V
 				values = table.concat [stringify v for v in *V], ', '
 				'['..values..']'
-			else
+			else -- TODO: pretty print
 				values = for k, v in pairs V
 					k = stringify k, true
 					v = stringify v, true
 					k .. ': ' .. v
 				'{' .. table.concat(values, ', ') ..'}'
+
 		when 'nil'
 			'NIL'
 		
@@ -94,6 +95,7 @@ stringify = (V, wrap) ->
 
 Logger.logfile = (path) ->
 	writeline = (text) ->
+		text ..= '\n'
 		if isfile path
 			appendfile path, text
 		else writefile path, text
