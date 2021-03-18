@@ -47,3 +47,23 @@ log.error('hush','this one logs!')
 -- pass nothing to clear the callback (stop logging)
 log.init()
 ```
+
+## Advanced Usage
+Instead of using `logfile`, you can use a custom writer function.
+```lua
+levels = {
+    system = "WARN",
+    other = "INFO",
+    hush = "OFF"
+}
+
+log.init(levels, function(level, tag, ...)
+    -- level is 'ERROR', 'WARN', or 'INFO'
+    -- tag is the name of the tag as a string
+    -- ... is the passed parameters
+    print(...)
+end)
+
+log.info('other', 'hello:', 'world')
+-- writer called with ('INFO', 'other', 'hello:', 'world')
+```
