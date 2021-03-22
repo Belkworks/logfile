@@ -105,4 +105,10 @@ Logger.logfile = (path) ->
 		formatted = [stringify args[i] for i = 1, table.maxn args]
 		writeline "%s  %s\t[%s] %s"\format os.date!, level, tag, table.concat formatted, ' '
 
+Logger.combine = (...) ->
+	fns = {...}
+	(...) ->
+		for fn in *fns
+			fn ...
+
 Logger

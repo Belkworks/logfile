@@ -179,4 +179,15 @@ Logger.logfile = function(path)
     return writeline(("%s  %s\t[%s] %s"):format(os.date(), level, tag, table.concat(formatted, ' ')))
   end
 end
+Logger.combine = function(...)
+  local fns = {
+    ...
+  }
+  return function(...)
+    for _index_0 = 1, #fns do
+      local fn = fns[_index_0]
+      fn(...)
+    end
+  end
+end
 return Logger
