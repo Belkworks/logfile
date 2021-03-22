@@ -7,6 +7,54 @@
 log = NEON:github('belkworks', 'logfile')
 ```
 
+See the bottom of this file for an annotated example.
+
+## Definitions
+
+**writer**: `(level, tag, ...) -> nil`  
+
+A writer is a function responsible for logging information to an output.
+A writer receives:
+- a level (either 'ERROR', 'WARN', or 'INFO').  
+- a tag (as a string)
+- any number of arguments
+
+**levels**: A dictionary of `tag -> level`, with both being strings.
+
+## API
+
+**logfile**: `log.logfile(path) -> writer`  
+Returns a writer that writes to the file at `path`.  
+If the file doesn't exist, it will be created when something is logged.
+```lua
+file = log.logfile('events.log')
+```
+
+**init**: `log.init(levels, writer) -> nil`  
+Set the levels and writer of the log.  
+If both arguments are `nil`, the loggers writer is unset.
+```lua
+levels = {system = 'WARN'}
+file = log.logfile('abc.log')
+log.init(levels, file)
+
+-- same as above
+log.init(levels)
+log.init(nil, file)
+```
+
+**info**: `log.info(tag, ...) -> nil`  
+Logs `...` if `tag`'s log level is `INFO`.
+
+**warn**: `log.warn(tag, ...) -> nil`  
+Logs `...` if `tag`'s log level is `WARN` or `ERROR`.
+
+**error**: `log.warn(tag, ...) -> nil`  
+Logs `...` if `tag`'s log level is not `OFF`.
+
+**tags**: `log.tags -> table`  
+The current dictionary of tags and their levels.
+
 ## Example
 
 ```lua
