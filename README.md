@@ -55,6 +55,15 @@ Logs `...` if `tag`'s log level is not `OFF`.
 **tags**: `log.tags -> table`  
 The current dictionary of tags and their levels.
 
+**combine**: `log.combine(writers...) -> writer`  
+Returns a new writer that runs all of the given writers.
+```lua
+file1 = log.logfile('events.log')
+file2 = log.logfile('events2.log')
+both = log.combile(file1, file2) -- writer that runs file1 and file2
+log.init(nil, both)
+```
+
 ## Example
 
 ```lua
